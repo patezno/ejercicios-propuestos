@@ -1,30 +1,39 @@
 # Escribe un programa que solicite por teclado 5 números positivos, forzando al usuario a que
 # únicamente introduzca valores positivos. A continuación el programa tiene que escribe cuál
 # es el valor más pequeño y cuál es el mayor valor de los introducidos por el usuario.
-from ejercicio19 import comprobar
-from ejercicio20 import negativos
-
-def comprobar_menor(num1, num2, num3, num4, num5):
-    if num1 < num2 and num1 < num3 and num1 < num4 and num1 < num5:
-        print("El numero " + str(num1) + " es el menor de todos")
-    elif num2 < num1 and num2 < num3 and num2 < num4 and num2 < num5:
-        print("El numero " + str(num2) + " es el menor de todos")
-    elif num3 < num2 and num3 < num1 and num3 < num4 and num3 < num5:
-        print("El numero " + str(num3) + " es el menor de todos")
-    elif num4 < num2 and num4 < num3 and num4 < num1 and num4 < num5:
-        print("El numero " + str(num4) + " es el menor de todos")
-    elif num5 < num2 and num5 < num3 and num5 < num4 and num5 < num1:
-        print("El numero " + str(num5) + " es el menor de todos")
-    else:
-        print("Algunos numeros son iguales")
 
 
-num1 = eval(input("Introduce un número: "))
-num2 = eval(input("Introduce otro número: "))
-num3 = eval(input("Introduce otro número: "))
-num4 = eval(input("Introduce otro número: "))
-num5 = eval(input("Introduce otro número: "))
+def comprobar_menor(lista):
+    numero = min(lista)
+    print("El numero " + str(numero) + " es el menor de todos")
 
-negativos(num1, num2, num3, num4, num5)
-comprobar(num1, num2, num3, num4, num5)
-comprobar_menor(num1, num2, num3, num4, num5)
+
+def introduccion_numeros(lista):
+    lista.append(eval(input("Introduce un número: ")))
+    lista.append(eval(input("Introduce otro número: ")))
+    lista.append(eval(input("Introduce otro número: ")))
+    lista.append(eval(input("Introduce otro número: ")))
+    lista.append(eval(input("Introduce otro número: ")))
+    return lista
+
+
+def negativos(lista):
+    for n in lista:
+        if n < 0:
+            print("Has introducido numeros negativos")
+            print("Solo se aceptan positivos")
+            del lista[:]
+            introduccion_numeros(lista)
+    return lista
+
+
+def comprobar(lista):
+    numero = max(lista)
+    print("El numero " + str(numero) + " es el mayor de todos")
+
+
+lista = []
+introduccion_numeros(lista)
+negativos(lista)
+comprobar(lista)
+comprobar_menor(lista)

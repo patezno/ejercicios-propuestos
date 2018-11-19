@@ -1,26 +1,32 @@
 # Repite el programa anterior, pero chequeando que el usuario no introduzca números
 # negativos. Si se da esta circunstancia hay que visualizar un mensaje de error, forzando al
 # usuario a que introduzca números positivos.
-from ejercicio19 import comprobar
 
-def negativos(num1, num2, num3, num4, num5):
-    while num1 < 0 or num2 < 0 or num3 < 0 or num4 < 0 or num5 < 0:
-        print("Has introducido numeros negativos")
-        print("Solo se aceptan positivos")
 
-        num1 = eval(input("Introduce un número: "))
-        num2 = eval(input("Introduce otro número: "))
-        num3 = eval(input("Introduce otro número: "))
-        num4 = eval(input("Introduce otro número: "))
-        num5 = eval(input("Introduce otro número: "))
+def introduccion_numeros(lista):
+    lista.append(eval(input("Introduce un número: ")))
+    lista.append(eval(input("Introduce otro número: ")))
+    lista.append(eval(input("Introduce otro número: ")))
+    lista.append(eval(input("Introduce otro número: ")))
+    lista.append(eval(input("Introduce otro número: ")))
+    return lista
 
-    return num1, num2, num3, num4, num5
 
-num1 = eval(input("Introduce un número: "))
-num2 = eval(input("Introduce otro número: "))
-num3 = eval(input("Introduce otro número: "))
-num4 = eval(input("Introduce otro número: "))
-num5 = eval(input("Introduce otro número: "))
+def negativos(lista):
+    for n in lista:
+        if n < 0:
+            print("Has introducido numeros negativos")
+            print("Solo se aceptan positivos")
+            del lista[:]
+            introduccion_numeros(lista)
+    return lista
 
-negativos(num1, num2, num3, num4, num5)
-comprobar(num1, num2, num3, num4, num5)
+
+def comprobar(lista):
+    numero = max(lista)
+    print("El numero " + str(numero) + " es el mayor de todos")
+
+lista = []
+introduccion_numeros(lista)
+negativos(lista)
+comprobar(lista)
